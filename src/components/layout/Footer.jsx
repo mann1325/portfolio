@@ -16,7 +16,15 @@ const Footer = () => (
       <div className="flex flex-col md:flex-row items-center justify-between gap-6">
         {/* Logo & rights */}
         <div className="text-center md:text-left">
-          <span className="font-display font-bold text-xl" style={{ color: 'var(--accent)' }}>{'<MS />'}</span>
+          <span
+            className="font-display font-bold text-2xl"
+            style={{
+              background: 'linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+          >MS</span>
           <p className="text-slate-500 text-sm mt-1">
             © {new Date().getFullYear()} Mann Shah. Built with React & ❤️
           </p>

@@ -105,10 +105,10 @@ const ProfileCard = () => (
 
     {/* Headline */}
     <div className="mb-6">
-      <p className="font-bold text-3xl leading-tight mb-1" style={{ color: 'var(--accent)' }}>
+      <p className="font-bold text-2xl sm:text-3xl leading-tight mb-1" style={{ color: 'var(--accent)' }}>
         Passionate
       </p>
-      <p className="font-bold text-3xl text-white leading-tight">
+      <p className="font-bold text-2xl sm:text-3xl text-white leading-tight">
         Developer and<br />Lifelong Learner
       </p>
     </div>
@@ -177,7 +177,7 @@ const About = () => (
       subtitle={null}
     />
 
-    <div className="grid md:grid-cols-3 gap-5 items-stretch">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
       <ProfileCard />
       <CodeBlock />
       <DriveCard />

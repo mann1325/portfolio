@@ -35,57 +35,48 @@ const ProjectThumb = ({ project }) => (
 /* ── Single timeline row ── */
 const ProjectRow = ({ project, index }) => {
   const isEven = index % 2 === 0;
+
+  // Mobile: simple stacked card
   return (
-    <div className="relative flex items-center gap-0">
-
-      {/* Left column */}
-      <motion.div
-        variants={isEven ? slideLeft : slideRight}
-        initial="hidden"
-        whileInView="visible"
-        viewport={viewportOpts}
-        custom={0}
-        className="w-[calc(50%-2rem)] flex justify-end pr-8"
-      >
-        {isEven ? (
+    <>
+      {/* Mobile layout */}
+      <div className="flex flex-col gap-5 md:hidden">
+        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOpts}>
           <ProjectThumb project={project} />
-        ) : (
-          <ProjectText project={project} align="right" />
-        )}
-      </motion.div>
-
-      {/* Center dot */}
-      <div className="flex flex-col items-center flex-shrink-0 w-16" style={{ zIndex: 2, position: 'relative' }}>
-        <motion.div
-          initial={{ scale: 0 }}
-          whileInView={{ scale: 1 }}
-          viewport={viewportOpts}
-          transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
-          className="w-4 h-4 rounded-full border-4"
-          style={{
-            borderColor: project.color,
-            backgroundColor: '#020817',
-            boxShadow: `0 0 12px ${project.color}`,
-          }}
-        />
+        </motion.div>
+        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOpts} custom={1}>
+          <ProjectText project={project} align="left" />
+        </motion.div>
       </div>
 
-      {/* Right column */}
-      <motion.div
-        variants={isEven ? slideRight : slideLeft}
-        initial="hidden"
-        whileInView="visible"
-        viewport={viewportOpts}
-        custom={0}
-        className="w-[calc(50%-2rem)] pl-8"
-      >
-        {isEven ? (
-          <ProjectText project={project} align="left" />
-        ) : (
-          <ProjectThumb project={project} />
-        )}
-      </motion.div>
-    </div>
+      {/* Desktop timeline layout */}
+      <div className="hidden md:flex relative items-center gap-0">
+        <motion.div
+          variants={isEven ? slideLeft : slideRight}
+          initial="hidden" whileInView="visible" viewport={viewportOpts} custom={0}
+          className="w-[calc(50%-2rem)] flex justify-end pr-8"
+        >
+          {isEven ? <ProjectThumb project={project} /> : <ProjectText project={project} align="right" />}
+        </motion.div>
+
+        <div className="flex flex-col items-center flex-shrink-0 w-16" style={{ zIndex: 2, position: 'relative' }}>
+          <motion.div
+            initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={viewportOpts}
+            transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
+            className="w-4 h-4 rounded-full border-4"
+            style={{ borderColor: project.color, backgroundColor: '#020817', boxShadow: `0 0 12px ${project.color}` }}
+          />
+        </div>
+
+        <motion.div
+          variants={isEven ? slideRight : slideLeft}
+          initial="hidden" whileInView="visible" viewport={viewportOpts} custom={0}
+          className="w-[calc(50%-2rem)] pl-8"
+        >
+          {isEven ? <ProjectText project={project} align="left" /> : <ProjectThumb project={project} />}
+        </motion.div>
+      </div>
+    </>
   );
 };
 
@@ -98,9 +89,12 @@ const ProjectText = ({ project, align }) => (
     >
       {project.title}
     </h3>
-    <p className="text-sm mb-3" style={{ color: project.color, opacity: 0.8 }}>
+    <p className="text-sm mb-1" style={{ color: project.color, opacity: 0.8 }}>
       {project.subtitle}
     </p>
+    {project.period && (
+      <p className="text-xs font-mono text-slate-500 mb-3">{project.period}</p>
+    )}
     <p className="text-slate-300 text-sm leading-relaxed mb-4 max-w-sm">
       {project.description}
     </p>
@@ -158,7 +152,7 @@ const Projects = () => (
           <ProjectRow project={project} index={i} />
           {/* Connector line between rows */}
           {i < projects.length - 1 && (
-            <div className="flex justify-center" style={{ height: '80px' }}>
+            <div className="hidden md:flex justify-center" style={{ height: '80px' }}>
               <div style={{ width: '2px', background: 'var(--accent)', opacity: 0.4 }} />
             </div>
           )}

@@ -113,7 +113,7 @@ const Contact = () => {
         subtitle="Have a project in mind or just want to chat? My inbox is always open."
       />
 
-      <div className="grid lg:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start max-w-5xl mx-auto">
         {/* Left — info */}
         <motion.div
           variants={fadeUp}
@@ -174,7 +174,7 @@ const Contact = () => {
           viewport={viewportOpts}
           custom={1}
         >
-          <form ref={formRef} onSubmit={handleSubmit} className="glass rounded-2xl p-8 space-y-5 gradient-border">
+          <form ref={formRef} onSubmit={handleSubmit} className="glass rounded-2xl p-5 sm:p-8 space-y-5 gradient-border">
             <FloatingInput label="Your Name" icon={FiUser} name="from_name" value={fields.from_name} onChange={onChange} />
             <FloatingInput label="Email Address" icon={FiMail} type="email" name="reply_to" value={fields.reply_to} onChange={onChange} />
             <FloatingInput label="Your Message" icon={FiMessageSquare} name="message" textarea value={fields.message} onChange={onChange} />

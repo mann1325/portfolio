@@ -44,10 +44,15 @@ const Navbar = () => {
           <motion.a
             href="#hero"
             whileHover={{ scale: 1.05 }}
-            className="font-display font-bold text-xl"
-            style={{ color: 'var(--accent)' }}
+            className="font-display font-bold text-2xl"
+            style={{
+              background: 'linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
           >
-            {'<MS />'}
+            MS
           </motion.a>
 
           {/* Desktop Nav */}
@@ -88,26 +93,7 @@ const Navbar = () => {
               ))}
             </div>
 
-            {/* Dark/light toggle */}
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={() => dispatch(toggleMode())}
-              className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-all"
-              aria-label="Toggle theme"
-            >
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.span
-                  key={mode}
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {mode === 'dark' ? <HiSun size={20} /> : <HiMoon size={20} />}
-                </motion.span>
-              </AnimatePresence>
-            </motion.button>
+
 
             {/* Mobile menu button */}
             <motion.button

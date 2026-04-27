@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import SectionWrapper from '../components/ui/SectionWrapper';
 import SectionTitle from '../components/ui/SectionTitle';
-import { personalInfo } from '../data';
 import { fadeUp, slideLeft, slideRight, viewportOpts } from '../utils/animations';
+import avatarImg from '../assets/avatar.png';
 
 /* ── Typed code block ── */
 const CodeBlock = () => (
@@ -91,11 +91,31 @@ const ProfileCard = () => (
       className="flex items-center gap-3 px-4 py-3 rounded-xl mb-6"
       style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}
     >
+      {/* Mini pop-out avatar */}
       <div
-        className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0"
-        style={{ background: 'linear-gradient(135deg, var(--accent-blue), var(--accent-purple))', color: '#fff' }}
+        className="w-10 h-10 rounded-full flex-shrink-0"
+        style={{
+          background: 'linear-gradient(135deg, var(--accent-blue), var(--accent-purple))',
+          overflow: 'visible',
+          display: 'flex',
+          alignItems: 'flex-end',
+          justifyContent: 'center',
+          position: 'relative',
+        }}
       >
-        MS
+        <img
+          src={avatarImg}
+          alt="Profile"
+          style={{
+            width: '140%',
+            height: 'auto',
+            objectFit: 'contain',
+            transform: 'translateY(10%)',
+            filter: 'drop-shadow(0 0 6px var(--accent))',
+            position: 'absolute',
+            bottom: 0,
+          }}
+        />
       </div>
       <div>
         <div className="text-white font-semibold text-sm">Mann Shah</div>

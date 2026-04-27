@@ -9,6 +9,7 @@ import {
 import { FiGithub, FiLinkedin } from 'react-icons/fi';
 import Button from '../components/ui/Button';
 import { personalInfo } from '../data';
+import avatarImg from '../assets/avatar.png';
 
 const floatingIcons = [
   { Icon: SiReact,       color: '#61DAFB', size: 32, x: '75%', y: '20%', delay: 0    },
@@ -70,15 +71,58 @@ const ParticleGrid = () => {
 
 /* ── Avatar ── */
 const Avatar = () => (
-  <div className="relative w-44 h-44 sm:w-56 sm:h-56 lg:w-64 lg:h-64 mx-auto">
-    <motion.div animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-      className="absolute inset-0 rounded-full border-2 border-dashed opacity-30" style={{ borderColor: 'var(--accent)' }} />
-    <motion.div animate={{ rotate: -360 }} transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-      className="absolute inset-2 rounded-full border border-dashed opacity-20" style={{ borderColor: 'var(--accent-purple)' }} />
-    <div className="absolute inset-4 rounded-full" style={{ boxShadow: '0 0 40px var(--accent), 0 0 80px var(--accent)' }} />
-    <div className="absolute inset-4 rounded-full glass flex items-center justify-center" style={{ border: '2px solid var(--accent)' }}>
-      <span className="font-display text-4xl sm:text-5xl font-bold gradient-text select-none">MS</span>
+  <div style={{ width: '500px', height: '700px', position: 'relative', overflow: 'visible' }}>
+
+    {/* Ring — behind figure, NO background fill */}
+    <div style={{
+      position: 'absolute',
+      width: '420px', height: '420px',
+      top: '140px',
+      left: '50%', transform: 'translateX(-50%)',
+      zIndex: 1,
+    }}>
+      {/* Dashed outer orbit */}
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 22, repeat: Infinity, ease: 'linear' }}
+        style={{
+          position: 'absolute', inset: '-36px', borderRadius: '50%',
+          border: '1px dashed rgba(139,92,246,0.25)',
+        }}
+      />
+      {/* Glow bloom only — no background */}
+      <div style={{
+        position: 'absolute', inset: 0, borderRadius: '50%',
+        background: 'transparent',
+        boxShadow: '0 0 50px 20px rgba(139,92,246,0.7), 0 0 100px 40px rgba(139,92,246,0.25)',
+      }} />
+      {/* Neon ring line — strictly transparent center */}
+      <div style={{
+        position: 'absolute', inset: 0, borderRadius: '50%',
+        background: 'transparent',
+        border: '4px solid rgba(200,150,255,1)',
+        boxShadow: '0 0 14px 6px rgba(200,150,255,1), 0 0 35px 12px rgba(139,92,246,0.9), 0 0 70px 25px rgba(139,92,246,0.45), inset 0 0 14px 6px rgba(200,150,255,0.2)',
+      }} />
     </div>
+
+    {/* Figure — large, anchored from top, overflows ring on all sides */}
+    <img
+  src={avatarImg}
+  alt="Profile"
+  style={{
+    position: 'absolute',
+    width: '700px',              // 🔥 increase size
+    height: 'auto',
+    top: '210px',
+    left: '50%',
+    transform: 'translate(-50%, -18%) scale(1.25)', // 🔥 key fix
+    zIndex: 10,
+    filter: `
+      drop-shadow(0 0 28px rgba(139,92,246,0.6))
+      drop-shadow(0 15px 50px rgba(139,92,246,0.4))
+    `,
+  }}
+/>
   </div>
 );
 
@@ -105,7 +149,7 @@ const Hero = () => {
         ref={sectionRef}
         id="hero"
         onMouseMove={handleMouse}
-        className="relative min-h-screen flex items-center overflow-hidden grid-bg spotlight"
+        className="relative min-h-screen flex items-center overflow-x-hidden grid-bg spotlight"
       >
         <ParticleGrid />
 
@@ -133,7 +177,7 @@ const Hero = () => {
 
         {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-screen pt-24 pb-16">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-screen pt-24 pb-16" style={{ overflow: 'visible' }}>
 
             {/* Avatar — mobile only, shown above text */}
             <motion.div
@@ -214,8 +258,8 @@ const Hero = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.4, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              style={{ x: springX, y: springY }}
-              className="hidden lg:flex justify-end"
+              style={{ x: springX, y: springY, overflow: 'visible', position: 'relative', zIndex: 20 }}
+              className="hidden lg:flex justify-center items-center"
             >
               <Avatar />
             </motion.div>

@@ -90,6 +90,7 @@ export const projects = [
     github: 'https://github.com/mann1325',
     demo: 'https://nova-ai-writing-assistant-platform.vercel.app/',
     period: 'Dec 2025 – Apr 2026',
+    color: '#a855f7',
   },
   {
     id: 2,

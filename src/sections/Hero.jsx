@@ -71,7 +71,7 @@ const ParticleGrid = () => {
 
 /* ── Avatar ── */
 const Avatar = () => (
-  <div style={{ width: '500px', height: '700px', position: 'relative', overflow: 'visible' }}>
+  <div style={{ width: '500px', height: '700px', position: 'relative', overflow: 'visible', pointerEvents: 'none' }}>
 
     {/* Ring — behind figure, NO background fill */}
     <div style={{
@@ -111,12 +111,13 @@ const Avatar = () => (
   alt="Profile"
   style={{
     position: 'absolute',
-    width: '700px',              // 🔥 increase size
+    width: '700px',
     height: 'auto',
     top: '210px',
     left: '50%',
-    transform: 'translate(-50%, -18%) scale(1.25)', // 🔥 key fix
+    transform: 'translate(-50%, -18%) scale(1.25)',
     zIndex: 10,
+    pointerEvents: 'none',
     filter: `
       drop-shadow(0 0 28px rgba(139,92,246,0.6))
       drop-shadow(0 15px 50px rgba(139,92,246,0.4))
@@ -153,9 +154,9 @@ const Hero = () => {
       >
         <ParticleGrid />
 
-        <div className="absolute top-1/4 left-1/4 w-64 sm:w-96 h-64 sm:h-96 rounded-full opacity-10 blur-3xl"
+        <div className="absolute top-1/4 left-1/4 w-64 sm:w-96 h-64 sm:h-96 rounded-full opacity-10 blur-3xl pointer-events-none"
           style={{ background: 'var(--accent-blue)' }} />
-        <div className="absolute bottom-1/4 right-1/4 w-64 sm:w-96 h-64 sm:h-96 rounded-full opacity-10 blur-3xl"
+        <div className="absolute bottom-1/4 right-1/4 w-64 sm:w-96 h-64 sm:h-96 rounded-full opacity-10 blur-3xl pointer-events-none"
           style={{ background: 'var(--accent-purple)' }} />
 
         {/* Floating icons — desktop only */}
@@ -176,20 +177,21 @@ const Hero = () => {
         ))}
 
         {/* Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-screen pt-24 pb-16" style={{ overflow: 'visible' }}>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full" style={{ pointerEvents: 'none' }}>
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-screen pt-24 pb-16" style={{ overflow: 'visible', pointerEvents: 'none' }}>
 
             {/* Avatar — mobile only, shown above text */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="flex justify-center lg:hidden"
+              style={{ pointerEvents: 'auto' }}
             >
               <Avatar />
             </motion.div>
 
             {/* Left — Text */}
-            <div>
+            <div style={{ pointerEvents: 'auto' }}>
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.6 }}
                 className="font-mono text-xs sm:text-sm uppercase tracking-widest neon-text mb-3 sm:mb-4"
@@ -258,7 +260,7 @@ const Hero = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.4, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              style={{ x: springX, y: springY, overflow: 'visible', position: 'relative', zIndex: 20 }}
+              style={{ x: springX, y: springY, overflow: 'visible', position: 'relative', zIndex: 20, pointerEvents: 'none' }}
               className="hidden lg:flex justify-center items-center"
             >
               <Avatar />

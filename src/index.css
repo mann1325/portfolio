@@ -94,6 +94,7 @@ html.light body {
   position: relative;
   background: var(--card-bg);
   border-radius: 12px;
+  overflow: hidden;
 }
 .gradient-border::before {
   content: '';
@@ -107,6 +108,7 @@ html.light body {
   mask-composite: exclude;
   opacity: 0;
   transition: opacity 0.3s ease;
+  pointer-events: none; /* FIX — was blocking all clicks inside the form */
 }
 .gradient-border:hover::before { opacity: 1; }
 

@@ -1,13 +1,14 @@
 import { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import emailjs from '@emailjs/browser';
-import { FiSend, FiUser, FiMail, FiMessageSquare, FiCheck, FiX } from 'react-icons/fi';
-import { FiGithub, FiLinkedin, FiTwitter } from 'react-icons/fi';
+import { FiSend, FiUser, FiMail, FiMessageSquare, FiCheck, FiX, FiGithub, FiLinkedin, FiTwitter } from 'react-icons/fi';
 import SectionWrapper from '../components/ui/SectionWrapper';
 import SectionTitle from '../components/ui/SectionTitle';
-import Button from '../components/ui/Button';
 import { personalInfo } from '../data';
 import { fadeUp, viewportOpts } from '../utils/animations';
+
+// Init EmailJS once with your public key
+emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
 
 const FloatingInput = ({ label, icon: Icon, type = 'text', name, textarea, value, onChange }) => (
   <motion.div
